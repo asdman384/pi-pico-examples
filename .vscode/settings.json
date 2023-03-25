@@ -34,6 +34,10 @@
         "one_wire.h": "c",
         "onewire.pio.h": "c",
         "structure.h": "c",
-        "onewire.h": "c"
+        "onewire.h": "c",
+        "mlx90614_driver_pal.h": "c",
+        "mlx90614_driver_common.h": "c",
+        "i2c.h": "c",
+        "ssd1306.h": "c"
     }
 }
