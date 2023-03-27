@@ -24,7 +24,7 @@ ssd1306_t init_display()
 
     ssd1306_t disp;
     disp.external_vcc = false;
-    ssd1306_init(&disp, 64, 32, 0x3C, i2c0);
+    ssd1306_init(&disp, 64, 48, 0x3C, i2c0);
     ssd1306_clear(&disp);
 
     return disp;

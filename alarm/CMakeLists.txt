@@ -10,5 +10,8 @@ pico_generate_pio_header(alarm ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio OUTPUT_DIR $
 target_link_libraries(alarm pico_stdlib)
 target_link_libraries(alarm hardware_pio)
 
+pico_enable_stdio_usb(alarm 1)
+pico_enable_stdio_uart(alarm 0)
+
 # create map/bin/hex file etc.
 pico_add_extra_outputs(alarm)

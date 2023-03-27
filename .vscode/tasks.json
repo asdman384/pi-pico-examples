@@ -6,7 +6,7 @@
       "label": "Easy Flash",
       "type": "shell",
       "command": "Copy-Item",
-      "args": ["C:\\Users\\opiankov\\Documents\\Pico-v1.5.0\\test\\build\\MLX90614\\MLX90614.uf2", "-Destination", "D:\\"],
+      "args": ["C:\\Users\\opiankov\\Documents\\Pico-v1.5.0\\test\\build\\alarm\\alarm.uf2", "-Destination", "D:\\"],
       "problemMatcher": []
     },
     {

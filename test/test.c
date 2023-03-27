@@ -1,27 +1,42 @@
+
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "hardware/gpio.h"
-#include "pico/binary_info.h"
 
-const uint LED_PIN = 0;
+#define BUTTON_PIN 14
+
+int64_t fire_alarm_callback(alarm_id_t id, void *user_data)
+{
+    printf("alarm_callback %d fired!\n", (int)id);
+    // Can return a value here in us to fire in the future
+    return 1000000;
+}
+
+void button_callback(uint gpio, uint32_t events)
+{
+}
+
+void init_button_interrupt(uint gpio, gpio_irq_callback_t callback)
+{
+    gpio_init(gpio);
+    gpio_set_dir(gpio, GPIO_IN);
+    gpio_pull_up(gpio);
+    gpio_set_irq_enabled_with_callback(gpio, GPIO_IRQ_EDGE_FALL, 1, callback);
+}
 
 int main()
 {
-
-    bi_decl(bi_program_description("This is a test binary."));
-    bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
-
     stdio_init_all();
+    printf("Hello Timer!\n");
 
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
+    init_button_interrupt(BUTTON_PIN, button_callback);
+
+    // Call alarm_callback in 2 seconds
+    add_alarm_in_ms(2000, fire_alarm_callback, NULL, false);
+
     while (1)
     {
-        gpio_put(LED_PIN, 0);
-        sleep_ms(251);
-        
-        gpio_put(LED_PIN, 1);
-        puts("Hello World\n");
-        sleep_ms(1000);
+        tight_loop_contents();
     }
+
+    return 0;
 }
